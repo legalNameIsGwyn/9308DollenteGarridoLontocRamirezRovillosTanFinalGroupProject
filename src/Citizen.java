@@ -128,8 +128,18 @@ public class Citizen implements Comparable {
 
     //end of getter methods
 
-    @Override
-    public int compareTo(Object o) {
-        return 0;
+    /**
+     * Compares citizens full names
+     * @param another
+     * @return
+     */
+    public int compareTo(Citizen another){
+        if (fullName.equals(another.getFullName()))
+            return 0;
+        else
+        if (fullName.compareTo(another.getFullName()) < 0)// alphabetically arranged
+            return -1;
+        else
+            return 1;
     }
 }
