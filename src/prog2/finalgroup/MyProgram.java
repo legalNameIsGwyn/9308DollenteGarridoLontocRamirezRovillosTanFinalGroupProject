@@ -28,7 +28,6 @@ public class MyProgram extends JFrame {
 
 
     public MyProgram() {
-
         text = new JLabel("<html>Total No. of Citizens: " +
                 "<br/>Number of Males: " +
                 "<br/>Number of Females: " +
@@ -92,26 +91,106 @@ public class MyProgram extends JFrame {
     }
 
     private class firstWindow {
+        private JButton name, age, district, resident, gender, clear;
+        private JLabel sort, filter;
+
+        private nameButtonHandler nameHandler;
+        private ageButtonHandler ageHandler;
+        private districtButtonHandler districtHandler;
+        private residentButtonHandler residentHandler;
+        private genderButtonHandler genderHandler;
+        private clearButtonHandler clearHandler;
+
+        private int WIDTH = 400;
+        private int HEIGHT = 300;
+
         public firstWindow() throws Exception {
-            JPanel subjectsPanel = new JPanel();
-            JScrollPane scrollPane = new JScrollPane();
-            text = new JLabel("List of All Citizens", SwingConstants.CENTER);
+            //new MyProgramUtility();
 
-            /**
-             ArrayList<Course> subjectsList = readData(source);
-             // converts the ArrayList subjectList into a regular Array to input inside a JList
-            JList<Course> list = new JList<Course>(subjectsList.toArray(new Course[subjectsList.size()]));
-            */
 
-            //subjectsPanel.setLayout(new GridLayout(1, 1));
-            subjectsPanel.add(text);
-            subjectsPanel.add(scrollPane);
-            frame.setTitle("List");
+            JPanel panel = new JPanel();
+            //JScrollPane scrollPane = new JScrollPane();
+            sort = new JLabel("Sort By: ", SwingConstants.LEFT);
+            filter = new JLabel("Filter Out:", SwingConstants.LEFT);
 
-            frame.add(subjectsPanel);
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            name = new JButton("Name");
+            nameHandler = new nameButtonHandler();
+            name.addActionListener(nameHandler);
+
+            age = new JButton("Age");
+            ageHandler = new ageButtonHandler();
+            age.addActionListener(ageHandler);
+
+            district = new JButton("District");
+            districtHandler = new districtButtonHandler();
+            district.addActionListener(districtHandler);
+
+            resident = new JButton("Resident");
+            residentHandler = new residentButtonHandler();
+            resident.addActionListener(residentHandler);
+
+            gender = new JButton("Gender");
+            genderHandler = new genderButtonHandler();
+            gender.addActionListener(genderHandler);
+
+            clear = new JButton("Clear");
+            clearHandler = new clearButtonHandler();
+            clear.addActionListener(clearHandler);
+
+
+            panel.setLayout(new GridLayout(2, 1));
+            panel.add(sort);
+            panel.add(name);
+            panel.add(age);
+            panel.add(district);
+            panel.add(filter);
+            panel.add(resident);
+            panel.add(gender);
+            panel.add(clear);
+            frame.setTitle("AllCitizens");
+
+            frame.add(panel);
+            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
             frame.pack();
             frame.setVisible(true);
+
+
+        }
+
+        private class nameButtonHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
+
+        private class ageButtonHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
+
+        private class districtButtonHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
+
+        private class residentButtonHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
+
+        private class genderButtonHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
+
+        private class clearButtonHandler implements ActionListener {
+            public void actionPerformed(ActionEvent e) {
+
+            }
         }
     }
 
@@ -121,3 +200,22 @@ public class MyProgram extends JFrame {
         }
     }
 
+/**JPanel panel = new JPanel();
+ JScrollPane scrollPane = new JScrollPane();
+
+ /**
+ ArrayList<Course> subjectsList = readData(source);
+ // converts the ArrayList subjectList into a regular Array to input inside a JList
+ JList<Course> list = new JList<Course>(subjectsList.toArray(new Course[subjectsList.size()]));
+
+
+ //subjectsPanel.setLayout(new GridLayout(1, 1));
+ subjectsPanel.add(text);
+ subjectsPanel.add(scrollPane);
+ frame.setTitle("List");
+
+ frame.add(subjectsPanel);
+ frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+ frame.pack();
+ frame.setVisible(true);
+ */
