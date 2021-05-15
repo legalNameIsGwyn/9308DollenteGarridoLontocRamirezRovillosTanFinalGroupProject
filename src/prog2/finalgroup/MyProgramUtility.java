@@ -3,6 +3,7 @@ package prog2.finalgroup;
 import java.util.*;
 import java.io.*;
 import java.util.stream.Collectors;
+
 /**
  * The MyProgramUtility class converts the input file into a list of Citizen objects and other methods that processes the data
  */
@@ -48,20 +49,25 @@ public class MyProgramUtility {
      * @return
      */
     public static double getAverageAge(List<Citizen> citizens, int district) {
-        return citizens.stream().filter(citizen -> citizen.getDistrict() == district).mapToInt(Citizen::getAge).average().getAsDouble();
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district)
+                .mapToInt(Citizen::getAge)
+                .average()
+                .getAsDouble();
     }
 
     /**
      * This method obtains the maximum number of districts
      * @param citizens
-     * @return 
+     * @return
      */
     public static int getMaxDistrict(List<Citizen> citizens) {
         return citizens
-            .stream()
-            .mapToInt(Citizen::getDistrict)
-            .max()
-            .orElseThrow();
+                .stream()
+                .mapToInt(Citizen::getDistrict)
+                .max()
+                .orElseThrow();
     }
 
     /**
@@ -72,9 +78,9 @@ public class MyProgramUtility {
      */
     public static long numberOfResidentsPerDistrict(List<Citizen> citizens, int district){
         return citizens
-            .stream()
-            .filter(citizen -> citizen.getResidence() && citizen.getDistrict() == district)
-            .count();
+                .stream()
+                .filter(citizen -> citizen.getResidence() && citizen.getDistrict() == district)
+                .count();
     }
 
     /**
@@ -85,11 +91,37 @@ public class MyProgramUtility {
      */
     public static long numberOfNonResidentsPerDistrict(List<Citizen> citizens, int district){
         return citizens
-            .stream()
-            .filter(citizen -> citizen.getResidence() != true && citizen.getDistrict() == district)
-            .count();
+                .stream()
+                .filter(citizen -> citizen.getResidence() != true && citizen.getDistrict() == district)
+                .count();
     }
 
+    /**
+     * This method returns the number of males and females in the population
+     * @param citizens
+     * @param gender
+     * @return
+     */
+    public static long populationPerGender(List<Citizen> citizens, char gender){
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getGender() == gender)
+                .count();
+    }
+
+    /**
+     * This method returns the number of males and females per district
+     * @param citizens
+     * @param gender
+     * @param district
+     * @return
+     */
+    public static long populationPerGenderPerDistrict(List<Citizen> citizens, char gender,int district){
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getGender() == gender && citizen.getDistrict() == district)
+                .count();
+    }
     /**
      * This method returns a list of citizens per district
      * @param citizens
@@ -98,23 +130,65 @@ public class MyProgramUtility {
      */
     public static List<String> getNamePerDistrict(List<Citizen> citizens, int district) {
         return citizens
-            .stream()
-            .filter(citizen -> citizen.getDistrict() == district)
-            .map(Citizen::getFullName)
-            .collect(Collectors.toList());
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district)
+                .map(Citizen::getFullName)
+                .collect(Collectors.toList());
     }
 
     /**
-     * This method sorts the name of residents per district 
+     * This method returns a list of emails of citizens living in a district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static List<String> getEmailPerDistrict(List<Citizen> citizens, int district) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district)
+                .map(Citizen::getEmail)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns a list of emails of residents in a district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static List<String> getResidentEmail(List<Citizen> citizens, int district) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence())
+                .map(Citizen::getEmail)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns a list of emails of non-residents in a district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static List<String> getNonResidentEmail(List<Citizen> citizens, int district) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence() != true)
+                .map(Citizen::getEmail)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This method sorts the name of residents per district
      * @param citizens
      * @param district
      * @return
      */
     public static List<String> sortResidentNamesPerDistrict(List<Citizen> citizens, int district) {
         return residentsPerDistrict(citizens, district)
-            .stream()
-            .sorted()
-            .collect(Collectors.toList());
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     /**
@@ -125,9 +199,9 @@ public class MyProgramUtility {
      */
     public static List<String> sortNonResidentNamesPerDistrict(List<Citizen> citizens, int district) {
         return nonResidentsPerDistrict(citizens, district)
-            .stream()
-            .sorted()
-            .collect(Collectors.toList());
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     /**
@@ -138,10 +212,10 @@ public class MyProgramUtility {
      */
     public static List<String> residentsPerDistrict(List<Citizen> citizens, int district) {
         return citizens
-            .stream()
-            .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence())
-            .map(Citizen::getFullName)
-            .collect(Collectors.toList());
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence())
+                .map(Citizen::getFullName)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -152,11 +226,12 @@ public class MyProgramUtility {
      */
     public static List<String> nonResidentsPerDistrict(List<Citizen> citizens, int district) {
         return citizens
-            .stream()
-            .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence() != true)
-            .map(Citizen::getFullName)
-            .collect(Collectors.toList());
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence() != true)
+                .map(Citizen::getFullName)
+                .collect(Collectors.toList());
     }
+
     /**
      * This method returns the list of addresses of the residents in the district
      * @param citizens
