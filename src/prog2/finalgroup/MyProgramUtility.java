@@ -3,13 +3,10 @@ package prog2.finalgroup;
 import java.util.*;
 import java.io.*;
 import java.util.stream.Collectors;
-
+/**
+ * The MyProgramUtility class converts the input file into a list of Citizen objects and other methods that processes the data
+ */
 public class MyProgramUtility {
-    public static void main(String[] args) {
-        List<Citizen> citizens = readFile("res\\data.csv");
-
-    }
-
     /**
      * This method converts data.csv into a list of citizen objects
      * @param data
