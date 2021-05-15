@@ -20,7 +20,7 @@ public class MyProgramUtility {
         try (Scanner fileReader = new Scanner(new File(data))) {
             while (fileReader.hasNextLine()) {
                 String[] information = fileReader.nextLine().split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                String fullName = information[1] + ", " + information[0];
+                String fullName = information[0] + " " + information[1];
                 String email = information[2];
                 String address = information[3];
                 int age = Integer.parseInt(information[4]);
@@ -159,5 +159,32 @@ public class MyProgramUtility {
             .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence() != true)
             .map(Citizen::getFullName)
             .collect(Collectors.toList());
+    }
+    /**
+     * This method returns the list of addresses of the residents in the district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static List<String> getAddressOfResident (List<Citizen> citizens, int district){
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence())
+                .map(Citizen::getAddress)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns the list of addresses of non-residents in the district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static List<String> getAddressOfNonResident (List<Citizen> citizens, int district){
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence() != true)
+                .map(Citizen::getAddress)
+                .collect(Collectors.toList());
     }
 }
