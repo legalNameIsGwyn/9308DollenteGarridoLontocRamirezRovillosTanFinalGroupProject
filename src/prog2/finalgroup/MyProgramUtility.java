@@ -95,33 +95,7 @@ public class MyProgramUtility {
                 .filter(citizen -> citizen.getResidence() != true && citizen.getDistrict() == district)
                 .count();
     }
-
-    /**
-     * This method returns the number of males and females in the population
-     * @param citizens
-     * @param gender
-     * @return
-     */
-    public static long populationPerGender(List<Citizen> citizens, char gender){
-        return citizens
-                .stream()
-                .filter(citizen -> citizen.getGender() == gender)
-                .count();
-    }
-
-    /**
-     * This method returns the number of males and females per district
-     * @param citizens
-     * @param gender
-     * @param district
-     * @return
-     */
-    public static long populationPerGenderPerDistrict(List<Citizen> citizens, char gender,int district){
-        return citizens
-                .stream()
-                .filter(citizen -> citizen.getGender() == gender && citizen.getDistrict() == district)
-                .count();
-    }
+    
     /**
      * This method returns a list of citizens per district
      * @param citizens
@@ -258,5 +232,34 @@ public class MyProgramUtility {
                 .filter(citizen -> citizen.getDistrict() == district && citizen.getResidence() != true)
                 .map(Citizen::getAddress)
                 .collect(Collectors.toList());
+    }
+    /**
+     * This method returns the number of males per district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static long getMalePerDistrict(List<Citizen> citizens, int district) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district)
+                .filter(citizen -> citizen.getGender() == 'M')
+                .mapToInt(Citizen::getGender)
+                .count();
+    }
+
+    /**
+     * This method returns the number of Females per district
+     * @param citizens
+     * @param district
+     * @return
+     */
+    public static long getFemalePerDistrict(List<Citizen> citizens, int district) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getDistrict() == district)
+                .filter(citizen -> citizen.getGender() == 'F')
+                .mapToInt(Citizen::getGender)
+                .count();
     }
 }
