@@ -82,7 +82,29 @@ public class MyProgramUtility {
                 .filter(citizen -> citizen.getResidence() && citizen.getDistrict() == district)
                 .count();
     }
+    /**
+     * This method counts the total number of residents
+     * @param citizens
+     * @return
+     */
+    public static long numberOfResidents(List<Citizen> citizens){
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getResidence())
+                .count();
+    }
 
+    /**
+     * This method counts the toal number of non residents
+     * @param citizens
+     * @return
+     */
+    public static long numberOfNonResidents(List<Citizen> citizens){
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getResidence() != true)
+                .count();
+    }
     /**
      * This method counts the number of Non-residents in a district
      * @param citizens
