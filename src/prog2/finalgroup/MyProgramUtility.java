@@ -27,7 +27,7 @@ public class MyProgramUtility {
                     resident = true;
                 }
                 int districtNumber = Integer.parseInt(information[6]);
-                char gender = 'x';
+                char gender;
                 if (information[7].compareToIgnoreCase("Male") == 0) {
                     gender = 'M';
                 } else {
@@ -42,6 +42,32 @@ public class MyProgramUtility {
         return citizens;
     }
 
+    /**
+     * Converts arraylist into object array
+     * @param citizens
+     * @return objArray
+     */
+    public static Object[][] toObjectArray(List<Citizen> citizens){
+        Object[][] objArray = new Object[citizens.size()][1];
+        for (int i = 0; i < citizens.size(); i++){
+            Object[] temp = {citizens.get(i).getFullName(), citizens.get(i).getEmail(), citizens.get(i).getAddress(), citizens.get(i).getAge(), citizens.get(i).getResidence(), citizens.get(i).getDistrict(), citizens.get(i).getGender()};
+            objArray[i] = temp;
+        }
+        return objArray;
+    }
+
+    /**
+     * This method returns the average age of all citizens
+     * @param citizens
+     * @return
+     */
+    public static double getAverageAge(List<Citizen> citizens) { //,int district) {
+        return citizens
+                .stream()
+                .mapToInt(Citizen::getAge)
+                .average()
+                .getAsDouble();
+    }
 
     /**
      * This method obtains the average age per district
@@ -49,7 +75,7 @@ public class MyProgramUtility {
      * @param district
      * @return
      */
-    public static double getAverageAge(List<Citizen> citizens, int district) {
+    public static double getAverageAgePerDistrict(List<Citizen> citizens, int district) {
         return citizens
                 .stream()
                 .filter(citizen -> citizen.getDistrict() == district)
@@ -128,6 +154,30 @@ public class MyProgramUtility {
                 .stream()
                 .filter(citizen -> citizen.getResidence() != true && citizen.getDistrict() == district)
                 .count();
+    }
+
+    /**
+     * This methods returns all the names of citizens
+     * @param citizens
+     * @return
+     */
+    public static List<String> getAllNames(List<Citizen> citizens) {
+        return citizens
+                .stream()
+                .map(Citizen::getFullName)
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This method returns all of the ages of citizens
+     * @param citizens
+     * @return
+     */
+    public static List<Integer> getAllAge(List<Citizen> citizens) {
+        return citizens
+                .stream()
+                .map(Citizen::getAge)
+                .collect(Collectors.toList());
     }
     
     /**
