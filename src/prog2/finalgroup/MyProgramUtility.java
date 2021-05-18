@@ -13,7 +13,7 @@ public class MyProgramUtility {
      * @param data
      * @return citizens
      */
-    private static List<Citizen> readFile(String data) {
+    public static List<Citizen> readFile(String data) {
         List<Citizen> citizens = new ArrayList<>();
         try (Scanner fileReader = new Scanner(new File(data))) {
             while (fileReader.hasNextLine()) {
@@ -41,6 +41,7 @@ public class MyProgramUtility {
         }
         return citizens;
     }
+
 
     /**
      * This method obtains the average age per district
@@ -71,6 +72,17 @@ public class MyProgramUtility {
     }
 
     /**
+     * This method returns total population
+     * @param citizens
+     * @return
+     */
+    public static long totalPopulation(List<Citizen> citizens){
+        return citizens
+                .stream()
+                .count();
+    }
+
+    /**
      * This method counts the numbers of residents in a district
      * @param citizens
      * @param district
@@ -95,7 +107,7 @@ public class MyProgramUtility {
     }
 
     /**
-     * This method counts the toal number of non residents
+     * This method counts the total number of non-residents
      * @param citizens
      * @return
      */
@@ -281,6 +293,32 @@ public class MyProgramUtility {
                 .stream()
                 .filter(citizen -> citizen.getDistrict() == district)
                 .filter(citizen -> citizen.getGender() == 'F')
+                .mapToInt(Citizen::getGender)
+                .count();
+    }
+
+    /**
+     * This method returns the total number of females
+     * @param citizens
+     * @return
+     */
+    public static long getTotalFemale(List<Citizen> citizens) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getGender() == 'F')
+                .mapToInt(Citizen::getGender)
+                .count();
+    }
+
+    /**
+     * This method returns the total number of males
+     * @param citizens
+     * @return
+     */
+    public static long getTotalMale(List<Citizen> citizens) {
+        return citizens
+                .stream()
+                .filter(citizen -> citizen.getGender() == 'M')
                 .mapToInt(Citizen::getGender)
                 .count();
     }
