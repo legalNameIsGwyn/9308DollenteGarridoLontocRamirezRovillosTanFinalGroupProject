@@ -23,8 +23,8 @@ public class MyProgram extends JFrame {
     private firstButtonHandler firstHandler;
     private secondButtonHandler secondHandler;
     private thirdButtonHandler thirdHandler;
-    private fourthButtonHandler fourthButton;
-    private fifthButtonHandler fifthButton;
+    private fourthButtonHandler fourthHandler;
+    private fifthButtonHandler fifthHandler;
     private exitButtonHandler exitHandler;
 
     private static int WIDTH = 400;
@@ -52,8 +52,8 @@ public class MyProgram extends JFrame {
         fourthButton.addActionListener(fourthHandler);
 
         fifthButton = new JButton("fifth");
-        fifthHandler = new thirdButtonHandler();
-        fifthButton.addActionListener(tfifthHandler);
+        fifthHandler = new fifthButtonHandler();
+        fifthButton.addActionListener(fifthHandler);
 
         exitButton = new JButton("Exit");
         exitHandler = new exitButtonHandler();
@@ -62,10 +62,12 @@ public class MyProgram extends JFrame {
         frame = new JFrame();
         setTitle("Citizens");
         Container pane = getContentPane();
-        pane.setLayout(new GridLayout(4, 1));
+        pane.setLayout(new GridLayout(6, 1));
         pane.add(firstButton);
         pane.add(secondButton);
         pane.add(thirdButton);
+        pane.add(fourthButton);
+        pane.add(fifthButton);
         pane.add(exitButton);
         setSize(WIDTH, HEIGHT);
         setVisible(true);
@@ -78,7 +80,7 @@ public class MyProgram extends JFrame {
     private class firstButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             Object[][] objArray = MyProgramUtility.toObjectArray(MyProgramUtility.readFile(source));
-            String[] colNames = {"Name", "Email", "Address", "Age", "District", "Residency", "Gender"};
+            String[] colNames = {"Name", "Email", "Address", "Age", "Is Resident", "District", "Gender"};
             JFrame firstWindowJFrame = new JFrame();
 
             JTable table = new JTable(objArray, colNames);
@@ -156,6 +158,78 @@ public class MyProgram extends JFrame {
             thirdWindowJFrame.setVisible(true);
             thirdWindowJFrame.setSize(WIDTH, HEIGHT);
             thirdWindowJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+    }
+
+    private class fourthButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFrame secondWindowJFrame = new JFrame();
+            JPanel panel = new JPanel();
+
+            List<Citizen> citizenList = MyProgramUtility.readFile(source);
+
+            label = new JLabel("<html>Total Number of Citizens: " + MyProgramUtility.totalPopulation(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Males: " +MyProgramUtility.getTotalMale(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Females: " +MyProgramUtility.getTotalFemale(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Residents: " +MyProgramUtility.numberOfResidents(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Non-Residents: "+MyProgramUtility.numberOfNonResidents(citizenList)+
+                    "<br/>"+
+                    "<br/>Number of Districts: "+ MyProgramUtility.getMaxDistrict(citizenList) +
+                    "<br/>"+
+                    "<br/>Average age of Citizens: "+ MyProgramUtility.getAverageAge(citizenList)+
+                    "</html>");
+
+            setTitle("Citizens");
+            Container pane = getContentPane();
+            pane.setLayout(new GridLayout(1, 1));
+            panel.add(label);
+
+            secondWindowJFrame.setTitle("Total Population");
+            secondWindowJFrame.add(panel);
+            secondWindowJFrame.pack();
+            secondWindowJFrame.setVisible(true);
+            secondWindowJFrame.setSize(WIDTH,HEIGHT);
+            secondWindowJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+    }
+
+    private class fifthButtonHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JFrame secondWindowJFrame = new JFrame();
+            JPanel panel = new JPanel();
+
+            List<Citizen> citizenList = MyProgramUtility.readFile(source);
+
+            label = new JLabel("<html>Total Number of Citizens: " + MyProgramUtility.totalPopulation(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Males: " +MyProgramUtility.getTotalMale(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Females: " +MyProgramUtility.getTotalFemale(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Residents: " +MyProgramUtility.numberOfResidents(citizenList)+
+                    "<br/>"+
+                    "<br/>Total Number of Non-Residents: "+MyProgramUtility.numberOfNonResidents(citizenList)+
+                    "<br/>"+
+                    "<br/>Number of Districts: "+ MyProgramUtility.getMaxDistrict(citizenList) +
+                    "<br/>"+
+                    "<br/>Average age of Citizens: "+ MyProgramUtility.getAverageAge(citizenList)+
+                    "</html>");
+
+            setTitle("Citizens");
+            Container pane = getContentPane();
+            pane.setLayout(new GridLayout(1, 1));
+            panel.add(label);
+
+            secondWindowJFrame.setTitle("Total Population");
+            secondWindowJFrame.add(panel);
+            secondWindowJFrame.pack();
+            secondWindowJFrame.setVisible(true);
+            secondWindowJFrame.setSize(WIDTH,HEIGHT);
+            secondWindowJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
     }
 
