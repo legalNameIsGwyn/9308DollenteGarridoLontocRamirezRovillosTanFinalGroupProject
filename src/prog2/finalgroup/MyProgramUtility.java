@@ -39,7 +39,7 @@ public class MyProgramUtility {
         } catch (Exception exception) {
             exception.printStackTrace();
         }
-        return citizens;
+        return sortCitizensName(citizens);
     }
 
     /**
@@ -241,9 +241,12 @@ public class MyProgramUtility {
      * @param citizens
      * @return
      */
-//    public static List<String> sortCitizensName(List<Citizen> citizens){
-//        
-//    }
+    public static List<Citizen> sortCitizensName(List<Citizen> citizens){
+        return citizens
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
+    }
 
     /**
      * This method sorts the name of residents per district
