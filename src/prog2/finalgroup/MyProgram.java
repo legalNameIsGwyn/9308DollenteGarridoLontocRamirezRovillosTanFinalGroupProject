@@ -6,11 +6,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.Scanner;
+import java.util.List;
 
 public class MyProgram extends JFrame {
+
     private Scanner kbd = new Scanner(System.in);
     private PrintWriter outputStream;
-    private String source = "";
+    private String source = "res/data.csv";
     private String output = "";
 
     private JButton firstButton, secondButton, thirdButton, exitButton;
@@ -23,26 +25,21 @@ public class MyProgram extends JFrame {
     private thirdButtonHandler thirdHandler;
     private exitButtonHandler exitHandler;
 
-    private static int WIDTH = 600;
-    private static int HEIGHT = 600;
-
+    private static int WIDTH = 400;
+    private static int HEIGHT = 400;
 
     public MyProgram() {
-        text = new JLabel("<html>Total No. of Citizens: " +
-                "<br/>Number of Males: " +
-                "<br/>Number of Females: " +
-                "<br/>Number of Residents: " +
-                "<br/>Number of Non-Residents: </html>");
+        System.out.println(MyProgramUtility.getMaxDistrict(MyProgramUtility.readFile(source)));
 
         firstButton = new JButton("All Citizens");
         firstHandler = new firstButtonHandler();
         firstButton.addActionListener(firstHandler);
 
-        secondButton = new JButton("add citizen");
+        secondButton = new JButton("Show totals");
         secondHandler = new secondButtonHandler();
         secondButton.addActionListener(secondHandler);
 
-        thirdButton = new JButton("remove citizen");
+        thirdButton = new JButton("");
         thirdHandler = new thirdButtonHandler();
         thirdButton.addActionListener(thirdHandler);
 
@@ -54,7 +51,6 @@ public class MyProgram extends JFrame {
         setTitle("Citizens");
         Container pane = getContentPane();
         pane.setLayout(new GridLayout(5, 1));
-        pane.add(text);
         pane.add(firstButton);
         pane.add(secondButton);
         pane.add(thirdButton);
@@ -76,6 +72,11 @@ public class MyProgram extends JFrame {
 
     private class secondButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            try {
+                new secondWindow();
+            } catch (Exception exception){
+                exception.printStackTrace();
+            }
         }
     }
 
@@ -90,110 +91,141 @@ public class MyProgram extends JFrame {
         }
     }
 
-    private class firstWindow {
-        private JButton name, age, district, resident, gender, clear;
-        private JLabel sort, filter;
+    private class firstWindow{
+        public firstWindow()throws Exception{
 
-        private nameButtonHandler nameHandler;
-        private ageButtonHandler ageHandler;
-        private districtButtonHandler districtHandler;
-        private residentButtonHandler residentHandler;
-        private genderButtonHandler genderHandler;
-        private clearButtonHandler clearHandler;
-
-        private int WIDTH = 400;
-        private int HEIGHT = 300;
-
-        public firstWindow() throws Exception {
-            //new MyProgramUtility();
-
-
-            JPanel panel = new JPanel();
-            //JScrollPane scrollPane = new JScrollPane();
-            sort = new JLabel("Sort By: ", SwingConstants.LEFT);
-            filter = new JLabel("Filter Out:", SwingConstants.LEFT);
-
-            name = new JButton("Name");
-            nameHandler = new nameButtonHandler();
-            name.addActionListener(nameHandler);
-
-            age = new JButton("Age");
-            ageHandler = new ageButtonHandler();
-            age.addActionListener(ageHandler);
-
-            district = new JButton("District");
-            districtHandler = new districtButtonHandler();
-            district.addActionListener(districtHandler);
-
-            resident = new JButton("Resident");
-            residentHandler = new residentButtonHandler();
-            resident.addActionListener(residentHandler);
-
-            gender = new JButton("Gender");
-            genderHandler = new genderButtonHandler();
-            gender.addActionListener(genderHandler);
-
-            clear = new JButton("Clear");
-            clearHandler = new clearButtonHandler();
-            clear.addActionListener(clearHandler);
-
-
-            panel.setLayout(new GridLayout(2, 1));
-            panel.add(sort);
-            panel.add(name);
-            panel.add(age);
-            panel.add(district);
-            panel.add(filter);
-            panel.add(resident);
-            panel.add(gender);
-            panel.add(clear);
-            frame.setTitle("AllCitizens");
-
-            frame.add(panel);
-            frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-            frame.pack();
-            frame.setVisible(true);
-
-
-        }
-
-        private class nameButtonHandler implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        }
-
-        private class ageButtonHandler implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        }
-
-        private class districtButtonHandler implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        }
-
-        private class residentButtonHandler implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        }
-
-        private class genderButtonHandler implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        }
-
-        private class clearButtonHandler implements ActionListener {
-            public void actionPerformed(ActionEvent e) {
-
-            }
         }
     }
 
+//    private class firstWindow {
+//        private JButton name, age, district, resident, gender, clear;
+//        private JLabel sort, filter;
+//
+//        private nameButtonHandler nameHandler;
+//        private ageButtonHandler ageHandler;
+//        private districtButtonHandler districtHandler;
+//        private residentButtonHandler residentHandler;
+//        private genderButtonHandler genderHandler;
+//        private clearButtonHandler clearHandler;
+//
+//        public firstWindow() throws Exception {
+//
+//            JPanel panel = new JPanel();
+//            //JScrollPane scrollPane = new JScrollPane();
+//            sort = new JLabel("Sort By: ", SwingConstants.LEFT);
+//            filter = new JLabel("Filter Out:", SwingConstants.LEFT);
+//
+//            name = new JButton("Name");
+//            nameHandler = new nameButtonHandler();
+//            name.addActionListener(nameHandler);
+//
+//            age = new JButton("Age");
+//            ageHandler = new ageButtonHandler();
+//            age.addActionListener(ageHandler);
+//
+//            district = new JButton("District");
+//            districtHandler = new districtButtonHandler();
+//            district.addActionListener(districtHandler);
+//
+//            resident = new JButton("Resident");
+//            residentHandler = new residentButtonHandler();
+//            resident.addActionListener(residentHandler);
+//
+//            gender = new JButton("Gender");
+//            genderHandler = new genderButtonHandler();
+//            gender.addActionListener(genderHandler);
+//
+//            clear = new JButton("Clear");
+//            clearHandler = new clearButtonHandler();
+//            clear.addActionListener(clearHandler);
+//
+//
+//            panel.setLayout(new GridLayout(2, 1));
+//            panel.add(sort);
+//            panel.add(name);
+//            panel.add(age);
+//            panel.add(district);
+//            panel.add(filter);
+//            panel.add(resident);
+//            panel.add(gender);
+//            panel.add(clear);
+//            frame.setTitle("All Citizens");
+//
+//            frame.add(panel);
+//            frame.pack();
+//            frame.setVisible(true);
+//            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//
+//        }
+//
+//        private class nameButtonHandler implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        }
+//
+//        private class ageButtonHandler implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        }
+//
+//        private class districtButtonHandler implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        }
+//
+//        private class residentButtonHandler implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        }
+//
+//        private class genderButtonHandler implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        }
+//
+//        private class clearButtonHandler implements ActionListener {
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        }
+//    }
+
+    private class secondWindow{
+        JLabel label;
+        JFrame jframe = new JFrame();
+        JPanel panel = new JPanel();
+
+        public secondWindow()throws Exception{
+
+            List<Citizen> citizenList = MyProgramUtility.readFile(source);
+
+            label = new JLabel("<html>Total Number of Citizens: " + MyProgramUtility.totalPopulation(citizenList)+
+                    "<br/>Total Number of Males: " +MyProgramUtility.getTotalMale(citizenList)+
+                    "<br/>Total Number of Females: " +MyProgramUtility.getTotalFemale(citizenList)+
+                    "<br/>Total Number of Residents: " +MyProgramUtility.numberOfResidents(citizenList)+
+                    "<br/>Total Number of Non-Residents: "+MyProgramUtility.numberOfNonResidents(citizenList)+ "</html>");
+
+            setTitle("Citizens");
+            Container pane = getContentPane();
+            pane.setLayout(new GridLayout(1, 1));
+            panel.add(label);
+
+
+            jframe.setTitle("Total Population");
+            jframe.add(panel);
+            jframe.pack();
+            jframe.setVisible(true);
+            setSize(WIDTH,HEIGHT);
+            jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        }
+
+
+    }
 
     public static void main(String[] args) {
         new MyProgram();
