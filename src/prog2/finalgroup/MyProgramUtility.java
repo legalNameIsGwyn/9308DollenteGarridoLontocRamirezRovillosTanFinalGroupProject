@@ -237,6 +237,15 @@ public class MyProgramUtility {
     }
 
     /**
+     * This method sorts the population lexicographically
+     * @param citizens
+     * @return
+     */
+//    public static List<String> sortCitizensName(List<Citizen> citizens){
+//        
+//    }
+
+    /**
      * This method sorts the name of residents per district
      * @param citizens
      * @param district
@@ -372,4 +381,5 @@ public class MyProgramUtility {
                 .mapToInt(Citizen::getGender)
                 .count();
     }
+
 }
