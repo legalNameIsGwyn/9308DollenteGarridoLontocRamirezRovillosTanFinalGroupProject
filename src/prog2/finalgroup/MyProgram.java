@@ -62,21 +62,38 @@ public class MyProgram extends JFrame {
 
     private class firstButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            try {
-                new firstWindow();
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+            JFrame firstWindowJFrame = new JFrame();
+
+            firstWindowJFrame.setSize(WIDTH,HEIGHT);
+
         }
     }
 
     private class secondButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            try {
-                new secondWindow();
-            } catch (Exception exception){
-                exception.printStackTrace();
-            }
+            JLabel label;
+            JFrame secondWindowJFrame = new JFrame();
+            JPanel panel = new JPanel();
+
+            List<Citizen> citizenList = MyProgramUtility.readFile(source);
+
+            label = new JLabel("<html>Total Number of Citizens: " + MyProgramUtility.totalPopulation(citizenList)+
+                    "<br/>Total Number of Males: " +MyProgramUtility.getTotalMale(citizenList)+
+                    "<br/>Total Number of Females: " +MyProgramUtility.getTotalFemale(citizenList)+
+                    "<br/>Total Number of Residents: " +MyProgramUtility.numberOfResidents(citizenList)+
+                    "<br/>Total Number of Non-Residents: "+MyProgramUtility.numberOfNonResidents(citizenList)+ "</html>");
+
+            setTitle("Citizens");
+            Container pane = getContentPane();
+            pane.setLayout(new GridLayout(1, 1));
+            panel.add(label);
+
+            secondWindowJFrame.setTitle("Total Population");
+            secondWindowJFrame.add(panel);
+            secondWindowJFrame.pack();
+            secondWindowJFrame.setVisible(true);
+            secondWindowJFrame.setSize(WIDTH,HEIGHT);
+            secondWindowJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
     }
 
@@ -91,11 +108,7 @@ public class MyProgram extends JFrame {
         }
     }
 
-    private class firstWindow{
-        public firstWindow()throws Exception{
 
-        }
-    }
 
 //    private class firstWindow {
 //        private JButton name, age, district, resident, gender, clear;
@@ -195,37 +208,6 @@ public class MyProgram extends JFrame {
 //        }
 //    }
 
-    private class secondWindow{
-        JLabel label;
-        JFrame jframe = new JFrame();
-        JPanel panel = new JPanel();
-
-        public secondWindow()throws Exception{
-
-            List<Citizen> citizenList = MyProgramUtility.readFile(source);
-
-            label = new JLabel("<html>Total Number of Citizens: " + MyProgramUtility.totalPopulation(citizenList)+
-                    "<br/>Total Number of Males: " +MyProgramUtility.getTotalMale(citizenList)+
-                    "<br/>Total Number of Females: " +MyProgramUtility.getTotalFemale(citizenList)+
-                    "<br/>Total Number of Residents: " +MyProgramUtility.numberOfResidents(citizenList)+
-                    "<br/>Total Number of Non-Residents: "+MyProgramUtility.numberOfNonResidents(citizenList)+ "</html>");
-
-            setTitle("Citizens");
-            Container pane = getContentPane();
-            pane.setLayout(new GridLayout(1, 1));
-            panel.add(label);
-
-
-            jframe.setTitle("Total Population");
-            jframe.add(panel);
-            jframe.pack();
-            jframe.setVisible(true);
-            setSize(WIDTH,HEIGHT);
-            jframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        }
-
-
-    }
 
     public static void main(String[] args) {
         new MyProgram();
