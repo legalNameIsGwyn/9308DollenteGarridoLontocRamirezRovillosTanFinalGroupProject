@@ -83,7 +83,11 @@ public class MyProgram extends JFrame {
             String[] colNames = {"Name", "Email", "Address", "Age", "Is Resident", "District", "Gender"};
             JFrame firstWindowJFrame = new JFrame();
 
-            JTable table = new JTable(objArray, colNames);
+            JTable table = new JTable(objArray, colNames){
+                public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                    return false;
+                }
+            };
             JScrollPane scrollPane = new JScrollPane(table);
 
             firstWindowJFrame.add(scrollPane);
