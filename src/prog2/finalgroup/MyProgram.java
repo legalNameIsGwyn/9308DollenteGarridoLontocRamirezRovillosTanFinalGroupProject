@@ -141,27 +141,74 @@ public class MyProgram extends JFrame {
      */
     private class thirdButtonHandler implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JFrame thirdWindowJFrame = new JFrame();
-            JPanel panel = new JPanel();
-            JTextField text = new JTextField();
-
-            List<Citizen> citizenList = MyProgramUtility.readFile(source);
-
-            label = new JLabel("Citizens sorted by District", SwingConstants.CENTER);
+            List<Citizen> citizens = MyProgramUtility.readFile(source);
+            JFrame thirdWindowFrame = new JFrame("Citizens Sorted By District");
+            thirdWindowFrame.setSize(1000, 450);
+            label = new JLabel();
+            label.setText("<html>District 1" + MyProgramUtility.sortNamesInDistrict(citizens, 1) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 2" + MyProgramUtility.sortNamesInDistrict(citizens, 2) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 3" + MyProgramUtility.sortNamesInDistrict(citizens, 3) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 4" + MyProgramUtility.sortNamesInDistrict(citizens, 4) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 5" + MyProgramUtility.sortNamesInDistrict(citizens, 5) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 6" + MyProgramUtility.sortNamesInDistrict(citizens, 6) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 7" + MyProgramUtility.sortNamesInDistrict(citizens, 7) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 8" + MyProgramUtility.sortNamesInDistrict(citizens, 8) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 9" + MyProgramUtility.sortNamesInDistrict(citizens, 9) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 10" + MyProgramUtility.sortNamesInDistrict(citizens, 10) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 11" + MyProgramUtility.sortNamesInDistrict(citizens, 11) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 12" + MyProgramUtility.sortNamesInDistrict(citizens, 12) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 13" + MyProgramUtility.sortNamesInDistrict(citizens, 13) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 14" + MyProgramUtility.sortNamesInDistrict(citizens, 14) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 15" + MyProgramUtility.sortNamesInDistrict(citizens, 15) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 16" + MyProgramUtility.sortNamesInDistrict(citizens, 16) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 17" + MyProgramUtility.sortNamesInDistrict(citizens, 17) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 18" + MyProgramUtility.sortNamesInDistrict(citizens, 18) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 19" + MyProgramUtility.sortNamesInDistrict(citizens, 19) +
+                    "<br/>" +
+                    "<br/>" +
+                    "<br/>District 20" + MyProgramUtility.sortNamesInDistrict(citizens, 20) +
+                    "</html>");
+            label.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             JScrollPane scroll = new JScrollPane(label, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            thirdWindowFrame.add(scroll);
+            thirdWindowFrame.setVisible(true);
 
-            setTitle("Citizens");
-            Container pane = getContentPane();
-            panel.setLayout(new GridLayout(1, 1));
-            panel.add(label);
-            panel.add(scroll);
-
-            thirdWindowJFrame.setTitle("Per District");
-            thirdWindowJFrame.add(panel);
-            thirdWindowJFrame.pack();
-            thirdWindowJFrame.setVisible(true);
-            thirdWindowJFrame.setSize(WIDTH, HEIGHT);
-            thirdWindowJFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         }
     }
 
